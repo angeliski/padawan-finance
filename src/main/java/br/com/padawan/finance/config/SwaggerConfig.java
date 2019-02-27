@@ -11,13 +11,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
+// Tutorial: https://medium.com/@raphaelbluteau/spring-boot-swagger-documentando-sua-api-automaticamente-27903293aeb6
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     @Bean
-    public Docket greetingApi() {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.padawan.finance"))
@@ -28,11 +28,10 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("Spring Boot REST API")
-                .description("\"Spring Boot REST API for greeting people\"")
+                .title("Padawan Finance REST API")
+                .description("\"Padawan Finance REST API for financial projects\"")
                 .version("1.0.0")
-                .license("Apache License Version 2.0")
-                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
+                .license("MIT")
                 .build();
     }
 

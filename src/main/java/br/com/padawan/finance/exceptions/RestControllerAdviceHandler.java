@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-@org.springframework.web.bind.annotation.RestControllerAdvice
-public class RestControllerAdvice {
+//Tutorial https://www.baeldung.com/exception-handling-for-rest-with-spring
+@RestControllerAdvice
+public class RestControllerAdviceHandler {
 
     @ExceptionHandler(NotOwnerTransactionException.class)
     public ResponseEntity<Erro> customHandler(Exception ex) {

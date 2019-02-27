@@ -15,8 +15,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static br.com.padawan.finance.config.SecurityConstants.SIGN_UP_URL;
-import static br.com.padawan.finance.config.SecurityConstants.SWAGGER_URL;
 
+// Tutorial https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,7 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v2/api-docs",
+        web.ignoring().antMatchers(
+                "/",
+                "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources",
                 "/configuration/security",
@@ -44,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL, SWAGGER_URL).permitAll()
+                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
